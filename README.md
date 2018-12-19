@@ -22,5 +22,5 @@
 
 - When admin creating a new allowed vacation day then the color of selected day will change to blue.
 - When employees or admins creating a new vacation requests for himself/herself then the color of selected day will change to yellow.
-- Employees or admins can delete the vacation request for himself/herself. The color of selected day will change to blue.
+- Employees or admins can delete the vacation request for himself/herself. Not matter if this day is accepted, declined or pending. The color of selected day will change to blue.
 - Admin can accepted the 
