@@ -8,3 +8,11 @@
 ## Default Admin login:
   - Username: admin@admin.com
   - Password: admin
+
+## Usage:
+  
+  - Admin:
+  
+  - Employee:
+  
+  - View:
