@@ -10,11 +10,10 @@
   - Password: admin
 
 ## Usage:
-  
   - Admin:
     - Can define allowed vacation days with left-click
     - Can create leave request for himself/herself with right-click
   - Employee:
     - Can create leave request for himself/herself with right-click
   - View:
-    - Can view leave allowed vacation days
+    - Can view allowed vacation days
