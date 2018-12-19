@@ -20,4 +20,6 @@
 
 ![alt text](https://github.com/twothinking/vacation_manager/blob/master/Screenshot%20from%202018-12-19%2016-39-01.jpg)
 
-- If admin creating a new allowed vacation day with the left click then the color of  day will change to blue
+- When admin creating a new allowed vacation day then the color of day will change to blue.
+- When employees or admins creating a new vacation requests for himself/herself then the color of day will change to yellow.
+- Employees or admins can delete the vacation request for himself/herself with right-click
