@@ -19,4 +19,4 @@
     - Can view allowed vacation days
 
 ## UI
-![alt text](https://raw.githubusercontent.com/twothinking/TRAPAC_SYSTEM_PEGASUS_TECHNOLOGIES/master/Screenshot%20from%202018-12-02%2013-12-49.png)
+![alt text](https://github.com/twothinking/vacation_manager/blob/master/Screenshot%20from%202018-12-19%2016-39-01.jpg)
