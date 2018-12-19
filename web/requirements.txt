@@ -1,0 +1,11 @@
+Flask
+Flask-Sqlalchemy
+Flask-Migrate
+Flask-Bootstrap
+Flask-Security
+Flask-WTF
+Flask-User
+Flask-WTF
+Flask-Login
+Flask-Admin
+Flask-Marshmallow

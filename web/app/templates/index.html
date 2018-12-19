@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+	<meta charset='utf-8' />
+	<link href="{{ url_for('static', filename='fullcalendar.css') }}" rel='stylesheet' />
+	<link href="{{ url_for('static', filename='fullcalendar.print.css') }}" rel='stylesheet' media='print' />
+	<link href="{{ url_for('static', filename='calendar/calendar.css') }}" rel='stylesheet' />
+	<script src="{{ url_for('static', filename='lib/moment.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='lib/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='fullcalendar.min.js') }}"></script>
+	{% if current_user.has_role('Admin') %}
+		<script src="{{ url_for('static', filename='fullcalendar-rightclick.js') }}"></script>
+	 	<script src="{{ url_for('static', filename='calendar/calendar-admin.js') }}"></script> 	
+	{% endif %}
+	{% if current_user.has_role('Employee') %}
+		<script src="{{ url_for('static', filename='fullcalendar-rightclick.js') }}"></script>
+		<script src="{{ url_for('static', filename='calendar/calendar-employee.js') }}"></script>
+	{% endif %}
+	{% if current_user.has_role('View') %}
+		<script src="{{ url_for('static', filename='calendar/calendar-view.js') }}"></script>		
+	{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<div id='container'>
+	<div id='calendar'></div>
+</div>
+{% endblock %}

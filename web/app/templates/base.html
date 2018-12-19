@@ -1,0 +1,47 @@
+{% extends 'bootstrap/base.html' %}
+
+<html>
+  <head>
+  </head>
+  <body>
+
+  {% block navbar %}
+    <nav class="navbar navbar-default">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index" class="navbar-brand">Vacation Manager</a>
+        </div>
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+           {% if current_user.has_role('Admin') %} 
+            <ul class="nav navbar-nav">
+                <li><a href="admin">Admin</a></li>
+            </ul>
+           {% endif %}
+            {% if not current_user.is_authenticated %} 
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="login">Login</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="register">Register</a></li>
+            </ul>
+           {% endif %}
+           {% if current_user.is_authenticated %} 
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="logout">Logout</a></li>
+            </ul>
+           {% endif %}
+
+        </div>
+    </nav>     
+  {% endblock %}
+
+ {% block content %}     
+ {% endblock %}
+</body>
+</html>
