@@ -12,7 +12,7 @@
 ## Usage:
   
   - Admin:
-    Can make leave requests
+    - Can make leave requests
   - Employee:
   
   - View:
