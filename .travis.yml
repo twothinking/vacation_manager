@@ -15,6 +15,6 @@ script:
 
 deploy:
   provider: script
-  script: docker push aeao93/vacation_manager:latest
+  script: docker push aeao93/vacation_manager
   on:
     branch: master
