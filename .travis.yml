@@ -8,7 +8,7 @@ services:
   - docker
 
 before_script:
-  - version="$(awk '$2 == "CAKE_SERVICE_VERSION" { print $3; exit }' Dockerfile)"
+  - version="$(awk '$2 == "VACATION_MANAGER_SERVICE_VERSION" { print $3; exit }' Dockerfile)"
   - docker pull aeao93/vacation_manager || true
 
 script:

@@ -1,5 +1,9 @@
 FROM python:3
 
+
+ENV VACATION_MANAGER_SERVICE_VERSION 1.1
+
+
 RUN apt-get update -y && \
     apt-get install -y python-pip python-dev && \
     pip install --upgrade pip
