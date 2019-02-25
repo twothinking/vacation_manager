@@ -24,6 +24,6 @@ before_deploy:
 
 deploy:
   provider: script
-  script: docker push myorg/myimage
+  script: docker push aeao93/vacation_manager
   on:
     branch: master
