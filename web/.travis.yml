@@ -6,5 +6,14 @@ services:
     - docker
 
 before_install:
+    - docker push aeao93/vacation_manager
     - docker build -t aeao93/vacation_manager .
     - docker run --rm -p 4000:80 aeao93/vacation_manager
+
+before_deploy:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+deploy:
+  provider: script
+  script: docker push aeao93/vacation_manager
+  on:
+    branch: master
