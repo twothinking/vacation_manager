@@ -3,17 +3,26 @@ sudo: required
 language: python
 
 services:
-    - docker
+  - docker
 
-before_install:
-    - docker push aeao93/vacation_manager
-    - docker build -t aeao93/vacation_manager .
-    - docker run --rm -p 4000:80 aeao93/vacation_manager
+env:
+  global:
+    - REGISTRY_USER=aeao93
+    # REGISTRY_PASS=...
+    - secret: "asd123asd123asd123asd123
+
+before_script:
+  - docker pull aeao93/vacation_manager || true
+script:
+  - docker build --pull --cache-from aeao93/vacation_manager --tag aeao93/vacation_manager .
+  - docker run myorg/myimage
+after_script:
+  - docker images
 
 before_deploy:
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
 deploy:
   provider: script
-  script: docker push aeao93/vacation_manager
+  script: docker push myorg/myimage
   on:
     branch: master
