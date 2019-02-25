@@ -1,15 +1,21 @@
 sudo: required
 
 language: python
+python:
+  - '3.6'
 
 services:
   - docker
 
 before_script:
+  - version="$(awk '$2 == "CAKE_SERVICE_VERSION" { print $3; exit }' Dockerfile)"
   - docker pull aeao93/vacation_manager || true
 
 script:
   - docker build --tag aeao93/vacation_manager .
 
-after_script:
-  - docker images
+deploy:
+  provider: script
+  script: docker push "aeao93/vacation_manager:latest" && docker push "aeao93/vacation_manager:${version}"
+  on:
+    branch: master
