@@ -7,13 +7,7 @@ services:
 
 before_script:
   - docker pull aeao93/vacation_manager || true
-  
-script:
   - docker build --tag aeao93/vacation_manager .
-  - docker run -p 4000:80 aeao93/vacation_manager
 
-deploy:
-  provider: script
-  script: docker push aeao93/vacation_manager
-  on:
-    branch: master
+script:
+  - docker ps | grep -q vacation_manager
