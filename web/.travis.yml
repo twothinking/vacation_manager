@@ -1,3 +1,6 @@
 language: python
 services:
     - docker
+
+before_install:
+    - docker build -t aeao93/vacation_manager .
