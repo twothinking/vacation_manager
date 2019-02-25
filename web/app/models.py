@@ -41,15 +41,15 @@ class AvaliableVacationDaySchema(ma.Schema):
 		fields = ('avaliable_day',)
 
 class User(UserMixin,db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(64), index=True, unique=True)
-    password = db.Column(db.String(128), nullable=False, server_default='')
-    active = db.Column(db.Boolean())
-    email_confirmed_at = db.Column(db.DateTime())
-    roles = db.relationship("Role",secondary='user_roles')
+	__tablename__ = 'users'
+	id = db.Column(db.Integer, primary_key=True)
+	email = db.Column(db.String(64), index=True, unique=True)
+	password = db.Column(db.String(128), nullable=False, server_default='')
+	active = db.Column(db.Boolean())
+	email_confirmed_at = db.Column(db.DateTime())
+	roles = db.relationship("Role",secondary='user_roles')
 
-    def __str__(self):
+	def __str__(self):
 		return self.email
 
 

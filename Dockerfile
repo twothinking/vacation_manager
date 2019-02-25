@@ -6,7 +6,7 @@ RUN apt-get update -y && \
 
 COPY . /app
 WORKDIR /app
-RUN pip install -r requirements.txt
+RUN pip install -r web/requirements.txt
 EXPOSE 80
 ENTRYPOINT ["python"]
-CMD ["VacationManager.py"]
+CMD ["web/VacationManager.py"]

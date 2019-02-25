@@ -15,7 +15,7 @@ before_script:
   - docker pull aeao93/vacation_manager || true
 script:
   - docker build --pull --cache-from aeao93/vacation_manager --tag aeao93/vacation_manager .
-  - docker run myorg/myimage
+  - docker run -p 4000:80 aeao93/vacation_manager
 after_script:
   - docker images
 
