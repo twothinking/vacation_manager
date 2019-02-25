@@ -1,8 +1,4 @@
-FROM python:3
-
-
-ENV VACATION_MANAGER_SERVICE_VERSION 1.1
-
+FROM python:3.6-slim
 
 RUN apt-get update -y && \
     apt-get install -y python-pip python-dev && \
