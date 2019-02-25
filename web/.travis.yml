@@ -4,3 +4,4 @@ services:
 
 before_install:
     - docker build -t aeao93/vacation_manager .
+    - docker run --rm -p 4000:80 aeao93/vacation_manager
