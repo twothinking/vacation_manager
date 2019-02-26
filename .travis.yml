@@ -8,6 +8,7 @@ services:
   - docker
 
 before_script:
+  - cd vacation_manager
   - docker pull aeao93/vacation_manager || true
 
 script:
