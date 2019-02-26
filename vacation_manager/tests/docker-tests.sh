@@ -28,7 +28,7 @@ main() {
     fi
 
     log "INFO: Starting test container"
-    docker run --rm -it aeao93/vacation_manager:testing tests/test.sh
+    docker run --rm -it aeao93/vacation_manager:testing tests/tests.sh
 }
 
 log() {
