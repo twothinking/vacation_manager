@@ -9,7 +9,6 @@ services:
 
 before_script:
   - cd vacation_manager
-  - docker build --tag aeao93/vacation_manager .
 
 script:
   - docker build --tag aeao93/vacation_manager .
