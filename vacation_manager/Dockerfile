@@ -6,6 +6,6 @@ RUN apt-get update -y && \
 
 COPY . /app
 WORKDIR /app
-RUN pip install -r web/requirements.txt
+RUN pip install -r requirements.txt
 EXPOSE 80
-CMD ["python", "web/vacation_manager.py"]
+CMD ["python", "vacation_manager.py"]

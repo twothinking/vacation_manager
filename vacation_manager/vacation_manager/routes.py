@@ -1,24 +1,29 @@
 """Routes"""
 
-from web.app import app, db
-from flask import render_template, url_for, request, flash, redirect, make_response, jsonify
-from web.app.forms import LoginForm, RegisterForm, ExtendedLoginForm
-from web.app.models import(
-	User, Role, AvaliableVacationDay,
-    AvaliableVacationDaySchema, State,
-    UserAvaliableVacationDays, UserAvaliableVacationDaysSchema)
-from flask_SECURITY import(
-	SECURITY, SQLAlchemyUserDatastore, UserMixin,
-    RoleMixin, login_required, utils,
-    roles_accepted, login_user,
-    logout_user, current_user)
-from datetime import datetime
 import json
-from collections import OrderedDict
+from datetime import datetime
+
+from flask import render_template, url_for, request, flash, redirect
+from flask_security import(
+    Security, SQLAlchemyUserDatastore,
+    login_required, utils,
+    roles_accepted,
+    logout_user, current_user)
 from sqlalchemy import exists
 
+from vacation_manager.forms import RegisterForm, ExtendedLoginForm
+from vacation_manager.models import(
+    User, Role, AvaliableVacationDay,
+    AvaliableVacationDaySchema, State,
+    UserAvaliableVacationDays)
+from vacation_manager import app, db
+
+
+# pylint: disable=no-member
+
+
 USER_DATASTORE = SQLAlchemyUserDatastore(db, User, Role)
-SECURITY = SECURITY(app, USER_DATASTORE, login_form=ExtendedLoginForm)
+SECURITY = Security(app, USER_DATASTORE, login_form=ExtendedLoginForm)
 
 @app.before_first_request
 def before_first_request():
@@ -66,8 +71,8 @@ def set_date_vacation_ajax():
         date = db.session.query(AvaliableVacationDay.id).filter_by(avaliable_day=date).scalar()
         state = db.session.query(State.id).filter_by(name="Pending").scalar()
         user_vacation = UserAvaliableVacationDays(vacation_day_id=date,
-        	                                         user_id=current_user.id,
-        	                                         state_id=state)
+                                                  user_id=current_user.id,
+                                                  state_id=state)
         db.session.add(user_vacation)
         db.session.commit()
     if str(operation) == "delete":
@@ -86,13 +91,13 @@ def get_date_vacation_ajax():
     """get vacation days ajax"""
     vacation_dates = db.session.query(UserAvaliableVacationDays).filter_by(user_id=current_user.id).all()
     data = []
-    for d in vacation_dates:
+    for dates in vacation_dates:
         row = {}
-        vacation_id = d.vacation_day_id
+        vacation_id = dates.vacation_day_id
         date = db.session.query(AvaliableVacationDay.avaliable_day).filter_by(id=vacation_id).scalar()
         new_date = str(date).split(' ')
         row["avaliable_day"] = new_date[0]
-        row["status"] = str(d.states.name)
+        row["status"] = str(dates.states.name)
         data.append(row)
 
     return json.dumps(data)
@@ -135,24 +140,7 @@ def get_date_ajax():
 @roles_accepted('Admin', 'Employee', 'View')
 def index():
     """home page"""
-    dates = AvaliableVacationDay.query.all()
     return render_template('index.html')
-
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    """login"""
-    form = LoginForm()
-    if form.validate_on_submit():
-        login_user(user)
-        flask.flash('Logged in successfully.')
-        next_ = flask.request.args.get('next')
-        if not is_safe_url(next):
-            return flask.abort(400)
-        return flask.redirect(next_ or flask.url_for('index'))
-    return flask.render_template('login.html', form=form)
-
 
 
 @app.route('/register', methods=['GET', 'POST'])

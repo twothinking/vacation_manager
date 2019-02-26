@@ -2,15 +2,11 @@
 
 set -eu
 unset CDPATH
-cd "$( dirname "$0" )/../.."
+cd "$( dirname "$0" )/.."
 
 main() {
 
 	local REAPER_IMAGE=
-    local CORE_IMAGE="flywheel/core:testing"
-    local CORE_URL=
-    local CORE_SECRET=
-    local VOLUME=
 
 	 while [ $# -gt 0 ]; do
         case "$1" in
@@ -32,7 +28,7 @@ main() {
     fi
 
     log "INFO: Starting test container"
-    docker run --rm -it aeao93/vacation_manager:testing web/tests/test.sh
+    docker run --rm -it aeao93/vacation_manager:testing tests/test.sh
 }
 
 log() {
