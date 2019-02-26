@@ -7,11 +7,13 @@ from flask_security.forms import LoginForm
 
 from vacation_manager.models import User
 
+
 class ExtendedLoginForm(LoginForm):
     """Extended Login Form"""
     email = StringField('Email', [DataRequired(), Email()])
     password = PasswordField('Password', [DataRequired()])
     remember = BooleanField('Remember Me')
+
 
 # pylint: disable=function-redefined
 class LoginForm(FlaskForm):
@@ -19,6 +21,7 @@ class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
+
 
 class RegisterForm(FlaskForm):
     """Register From"""

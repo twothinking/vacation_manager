@@ -41,6 +41,7 @@ class UserAvaliableVacationDaysSchema(ma.Schema):
         # Fields to expose
         fields = ('vacation_day_id', 'user_id', 'state_id')
 
+
 class AvaliableVacationDay(db.Model):
     """Avaliable vacation days"""
     __tablename__ = 'avaliable_vacation_day'
@@ -57,6 +58,7 @@ class AvaliableVacationDaySchema(ma.Schema):
         """Meta data"""
         # Fields to expose
         fields = ('avaliable_day',)
+
 
 class User(UserMixin, db.Model):
     """Users"""
@@ -93,12 +95,14 @@ class Role(RoleMixin, db.Model):
     def __str__(self):
         return self.name
 
+
 class UserRoles(db.Model):
     """User roles"""
     __tablename__ = 'user_roles'
     id = db.Column(db.Integer(), primary_key=True)
     user_id = db.Column(db.Integer(), db.ForeignKey('users.id', ondelete='CASCADE'))
     role_id = db.Column(db.Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))
+
 
 @login.user_loader
 def load_user(uid):

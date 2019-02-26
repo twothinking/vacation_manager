@@ -1,9 +1,7 @@
 """Init Vacation Manager"""
 
 import datetime
-
 # pylint: disable=ungrouped-imports
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -31,6 +29,7 @@ migrate = Migrate(app, db)
 # pylint: disable=wrong-import-position
 from vacation_manager.models import User, Role, UserAvaliableVacationDays, AvaliableVacationDay, State
 
+
 class MyAdminIndexView(AdminIndexView):
     """Admin index"""
     @expose('/')
@@ -41,6 +40,7 @@ class MyAdminIndexView(AdminIndexView):
 
     def is_accessible(self):
         return current_user.has_role("Admin")
+
 
 class MyView(BaseView):
     """My view"""
@@ -54,6 +54,7 @@ class MyView(BaseView):
     def is_accessible(self):
         return current_user.has_role("Admin")
 
+
 class UserTools(ModelView):
     """User tools"""
     can_create = False
@@ -63,11 +64,13 @@ class UserTools(ModelView):
     form_edit_rules = ['email', 'active', 'roles']
     column_searchable_list = ['email']
 
+
 class VacationTools(ModelView):
     """Vacation Tools"""
     can_create = False
     can_delete = False
     column_searchable_list = [User.email, AvaliableVacationDay.avaliable_day, State.name]
+
 
 admin = Admin(app, name="Vacation Manager", index_view=MyAdminIndexView())
 admin.add_link(MenuLink(name='Home Page', url='/', category='Go To'))

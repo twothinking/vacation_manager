@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 
 from flask import render_template, url_for, request, flash, redirect
-from flask_security import(
+from flask_security import (
     Security, SQLAlchemyUserDatastore,
     login_required, utils,
     roles_accepted,
@@ -12,7 +12,7 @@ from flask_security import(
 from sqlalchemy import exists
 
 from vacation_manager.forms import RegisterForm, ExtendedLoginForm
-from vacation_manager.models import(
+from vacation_manager.models import (
     User, Role, AvaliableVacationDay,
     AvaliableVacationDaySchema, State,
     UserAvaliableVacationDays)
@@ -24,6 +24,7 @@ from vacation_manager import app, db
 
 USER_DATASTORE = SQLAlchemyUserDatastore(db, User, Role)
 SECURITY = Security(app, USER_DATASTORE, login_form=ExtendedLoginForm)
+
 
 @app.before_first_request
 def before_first_request():
@@ -43,7 +44,6 @@ def before_first_request():
 
     db.session.commit()
 
-
     USER_DATASTORE.find_or_create_role(name='Admin')
     USER_DATASTORE.find_or_create_role(name='Employee')
     USER_DATASTORE.find_or_create_role(name='View')
@@ -56,7 +56,6 @@ def before_first_request():
 
     USER_DATASTORE.add_role_to_user('admin@admin.com', 'Admin')
     db.session.commit()
-
 
 
 @login_required
@@ -81,7 +80,6 @@ def set_date_vacation_ajax():
         db.session.delete(this_date)
         db.session.commit()
     return "Sucsess"
-
 
 
 @login_required
@@ -122,7 +120,6 @@ def set_date_ajax():
     return "Sucsess"
 
 
-
 @login_required
 @roles_accepted('Admin', 'Employee', 'View')
 @app.route('/get_date_ajax', methods=['POST'])
@@ -158,7 +155,6 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
-
 
 
 @app.route('/logout')
