@@ -8,5 +8,4 @@ COPY . /app
 WORKDIR /app
 RUN pip install -r web/requirements.txt
 EXPOSE 80
-ENTRYPOINT ["python"]
-CMD ["web/VacationManager.py"]
+CMD ["python", "web/vacation_manager.py"]

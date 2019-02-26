@@ -9,3 +9,4 @@ Flask-WTF
 Flask-Login
 Flask-Admin
 Flask-Marshmallow
+pylint==2.2.2
