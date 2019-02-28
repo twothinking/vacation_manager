@@ -5,9 +5,18 @@ unset CDPATH
 cd "$( dirname "$0" )/.."
 
 main() {
-    log "INFO: Lint aeao93/vacation_manager:testing image ..."
+	log "INFO: Running tests ..."
+    pytest
+    # rm -f tests/running_pytest
+    # log "INFO: Reporting coverage ..."
+    
+    # local COVERAGE_ARGS="--skip-covered --omit=reaper/eeg_reaper_gui.py"
+    # coverage report --show-missing $COVERAGE_ARGS
+    # coverage html $COVERAGE_ARGS
+
+    log "INFO: Running pylint ..."
     pylint --rcfile tests/.pylintrc vacation_manager
-    log "INFO: PyCodeStyle aeao93/vacation_manager:testing image ..."
+    log "INFO: Running pycodestyle ..."
     pycodestyle --max-line-length=150 --ignore=E402 vacation_manager
 }
 

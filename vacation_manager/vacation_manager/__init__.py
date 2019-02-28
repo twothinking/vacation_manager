@@ -26,12 +26,18 @@ db = SQLAlchemy(app)
 app.config.from_object(Config)
 migrate = Migrate(app, db)
 
+
+def create_app():
+    return app
+
+
 # pylint: disable=wrong-import-position
 from vacation_manager.models import User, Role, UserAvaliableVacationDays, AvaliableVacationDay, State
 
 
 class MyAdminIndexView(AdminIndexView):
     """Admin index"""
+
     @expose('/')
     def index(self):
         if current_user.has_role("Admin"):

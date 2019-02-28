@@ -11,3 +11,5 @@ Flask-Admin
 Flask-Marshmallow
 pylint==2.2.2
 pycodestyle==2.5.0
+pytest-flask
+requests

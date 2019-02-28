@@ -7,7 +7,7 @@ BASEDIR = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
     """Config Object"""
 
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'sidefgsaofnaosihgfiuosabngfiuashfgasounfoassdg'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
                               'sqlite:///' + os.path.join(BASEDIR, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -19,3 +19,4 @@ class Config(object):
     SECURITY_PASSWORD_SALT = "csirkepaprikas"
     SECURITY_LOGIN_USER_TEMPLATE = 'custom/login.html'
     SECURITY_FLASH_MESSAGES = True
+    
