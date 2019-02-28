@@ -6,14 +6,9 @@ cd "$( dirname "$0" )/.."
 
 main() {
 	log "INFO: Running tests ..."
-    pytest
-    # rm -f tests/running_pytest
-    # log "INFO: Reporting coverage ..."
-    
-    # local COVERAGE_ARGS="--skip-covered --omit=reaper/eeg_reaper_gui.py"
-    # coverage report --show-missing $COVERAGE_ARGS
-    # coverage html $COVERAGE_ARGS
-
+    coverage run -m pytest
+    log "INFO: Coverage"
+    coverage report
     log "INFO: Running pylint ..."
     pylint --rcfile tests/.pylintrc vacation_manager
     log "INFO: Running pycodestyle ..."
