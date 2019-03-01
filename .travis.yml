@@ -9,6 +9,7 @@ services:
 
 before_script:
   - cd vacation_manager
+  - docker login -u CI_REGISTRY_USER -p $CI_REGISTRY_PASS
 
 script:
   - docker build --tag aeao93/vacation_manager .
@@ -17,3 +18,4 @@ script:
 after_success:
   - docker tag aeao93/vacation_manager:latest aeao93/vacation_manager:beta
   - docker push aeao93/vacation_manager
+  - docker logout
