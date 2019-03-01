@@ -15,5 +15,5 @@ script:
   - ./tests/docker-tests.sh
 
 after_success:
-  - docker tag vacation_manager:latest aeao93/vacation_manager:beta
-  - docker push aeao93/vacation_manager:beta
+  - docker tag aeao93/vacation_manager:latest aeao93/vacation_manager:beta
+  - docker push aeao93/vacation_manager
