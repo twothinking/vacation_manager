@@ -15,12 +15,11 @@ USER_DATASTORE = SQLAlchemyUserDatastore(db, User, Role)
 @pytest.fixture()
 def app():
     app = create_app()
-    app.config['LOGIN_DISABLED'] = True
     app.config['TESTING'] = True
     app.config['WTF_CSRF_ENABLED'] = False
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     return app
+
 
 @pytest.fixture(scope='session')
 def admin_user():
@@ -33,6 +32,7 @@ def admin_user():
     db.session.commit()
 
     return user
+
 
 @pytest.fixture(scope='session')
 def simple_user():
