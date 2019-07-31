@@ -13,22 +13,22 @@ stages:
 
 cache:
   paths:
-  - $HOME/.docker/caches
+  - $HOME/.cache/docker
 
 Build:
   stage: build
   script:
-    - test -f "$HOME/.docker/caches/cache.tar" && docker load -i "$HOME/.docker/caches/cache.tar" || true
+    - test -f "$HOME/.cache/docker/cache.tar" && docker load -i "$HOME/.cache/docker/cache.tar" || true
     - cd vacation_manager
     - docker build --tag vacation_manager .
-    - docker save -o "$HOME/.docker/caches/cache.tar" $(docker history -q vacation_manager | grep -v '<missing>')
+    - docker save -o "$HOME/.cache/docker/cache.tar" $(docker history -q vacation_manager | grep -v '<missing>')
 
 DeployMaster:
   only:
     - master
   stage: deploy
   script:
-    - docker load -i "$DOCKER_DIR/cache.tar"
+    - docker load -i "$$HOME/.cache/docker/cache.tar"
     - docker tag vacation_manager aeao93/vacation_manager:latest
     - docker push aeao93/vacation_manager:latest
 
