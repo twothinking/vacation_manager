@@ -1,0 +1,18 @@
+image: docker:python:3.7.3-alpine3.9
+
+# variables:
+#   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/docker"
+
+# cache:
+#   paths:
+#     - .cache/docker
+
+stages:
+  - build
+  - test
+  - deploy
+
+before_script:
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce realpath
+  - yes | docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASS
