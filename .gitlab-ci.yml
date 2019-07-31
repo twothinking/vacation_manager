@@ -1,5 +1,9 @@
 image: docker:stable
 
+services:
+  - docker:dind
+
+
 variables:
   DOCKER_DRIVER: overlay2
 
