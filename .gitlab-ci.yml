@@ -5,6 +5,7 @@ services:
 
 before_script:
   - docker info
+  - cd vacation_manager
 
 stages:
   - build
