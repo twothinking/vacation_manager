@@ -23,7 +23,8 @@ Build:
 #     - echo "HELLO WORLD"
 
 DeployMaster:
-  services: vacation_manager
+  services: 
+    - vacation_manager
   only:
     - master
   stage: deploy
