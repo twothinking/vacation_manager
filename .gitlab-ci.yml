@@ -3,10 +3,6 @@ image: docker:stable
 services:
   - docker:dind
 
-before_script:
-  - docker info
-
 build_image:
   script:
-    - tests/docker-tests.sh
-    - docker run my-docker-image /script/to/run/tests
+    - "HELLO WORLD"
