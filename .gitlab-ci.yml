@@ -15,7 +15,7 @@ before_script:
 Test:
   stage: test
   script:
-    - "HELLO WORLD"
+    - echo "HELLO WORLD"
 
 PUSH_MASTER:
   only:
