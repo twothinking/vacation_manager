@@ -6,7 +6,16 @@ services:
 before_script:
   - docker info
 
-build_image:
-    script:
-        - tests/docker-tests.sh
-        - docker run my-docker-image /script/to/run/tests
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - docker build --tag aeao93/vacation_manager .
+
+test:
+  stage: test
+  script:
+    - tests/docker-tests.sh
