@@ -10,6 +10,9 @@ cache:
   paths:
   - .cache/docker
 
+before_script:
+  - mkdir $DOCKER_CACHE_DIR
+
 stages:
   - build
   - test
