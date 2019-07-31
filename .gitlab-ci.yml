@@ -3,6 +3,15 @@ image: docker:stable
 services:
   - docker:dind
 
-build_image:
+before_script:
+  - docker info
+  - cd vacation_manager
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
   script:
-    - "HELLO WORLD"
+    - docker build --tag aeao93/vacation_manager .
