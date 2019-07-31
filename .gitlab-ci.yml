@@ -4,31 +4,31 @@ services:
   - docker:dind
 
 variables:
-  DOCKER_DRIVER: overlay2
+    DOCKER_CACHE_DIR: "$CI_PROJECT_DIR/.cache/docker"
+
+cache:
+  paths:
+  - .cache/docker
 
 stages:
   - build
   - test
   - deploy
 
-cache:
-  paths:
-  - $HOME/.cache/docker
-
 Build:
   stage: build
   script:
-    - test -f "$HOME/.cache/docker/cache.tar" && docker load -i "$HOME/.cache/docker/cache.tar" || true
+    - test -f "${DOCKER_CACHE_DIR}/cache.tar" && docker load -i "${DOCKER_CACHE_DIR}/cache.tar" || true
     - cd vacation_manager
     - docker build --tag vacation_manager .
-    - docker save -o "$HOME/.cache/docker/cache.tar" $(docker history -q vacation_manager | grep -v '<missing>')
+    - docker save -o "${DOCKER_CACHE_DIR}/cache.tar" $(docker history -q vacation_manager | grep -v '<missing>')
 
 DeployMaster:
   only:
     - master
   stage: deploy
   script:
-    - docker load -i "$$HOME/.cache/docker/cache.tar"
+    - docker load -i "${DOCKER_CACHE_DIR}/cache.tar"
     - docker tag vacation_manager aeao93/vacation_manager:latest
     - docker push aeao93/vacation_manager:latest
 
