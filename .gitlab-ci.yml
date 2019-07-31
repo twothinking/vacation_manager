@@ -2,19 +2,19 @@ image: docker:stable
 
 services:
   - docker:dind
+  
+variables:
+  DOCKER_DRIVER: overlay2
 
 stages:
   - build
   - test
   - deploy
 
-before_script:
-  - docker info
-  - cd vacation_manager
-  
 Build:
   stage: build
   script:
+    - cd vacation_manager
     - docker build --tag aeao93/vacation_manager .
 
 Test:
