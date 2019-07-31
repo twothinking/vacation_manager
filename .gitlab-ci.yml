@@ -16,9 +16,6 @@ Build:
   script:
     - cd vacation_manager
     - docker build --tag vacation_manager .
-  cache:
-    paths:
-      - 
 
 # Test:
 #   stage: test
