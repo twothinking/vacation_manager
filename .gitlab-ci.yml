@@ -3,7 +3,6 @@ image: docker:stable
 services:
   - docker:dind
 
-
 variables:
   DOCKER_DRIVER: overlay2
 
@@ -12,24 +11,24 @@ stages:
   - test
   - deploy
 
+cache:
+  paths:
+  - $HOME/.docker/caches
+
 Build:
   stage: build
   script:
+    - test -f "$DOCKER_DIR/cache.tar" && docker load -i "$DOCKER_DIR/cache.tar" || true
     - cd vacation_manager
     - docker build --tag vacation_manager .
-
-# Test:
-#   stage: test
-#   script:
-#     - echo "HELLO WORLD"
+    - docker save -o "$DOCKER_DIR/cache.tar" $(docker history -q vacation_manager | grep -v '<missing>')
 
 DeployMaster:
-  services: 
-    - vacation_manager
   only:
     - master
   stage: deploy
   script:
+    - docker load -i "$DOCKER_DIR/cache.tar"
     - docker tag vacation_manager aeao93/vacation_manager:latest
     - docker push aeao93/vacation_manager:latest
 
