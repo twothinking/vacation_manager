@@ -18,10 +18,10 @@ cache:
 Build:
   stage: build
   script:
-    - test -f "$DOCKER_DIR/cache.tar" && docker load -i "$DOCKER_DIR/cache.tar" || true
+    - test -f "$HOME/.docker/caches/cache.tar" && docker load -i "$HOME/.docker/caches/cache.tar" || true
     - cd vacation_manager
     - docker build --tag vacation_manager .
-    - docker save -o "$DOCKER_DIR/cache.tar" $(docker history -q vacation_manager | grep -v '<missing>')
+    - docker save -o "$HOME/.docker/caches/cache.tar" $(docker history -q vacation_manager | grep -v '<missing>')
 
 DeployMaster:
   only:
