@@ -15,14 +15,18 @@ Build:
   stage: build
   script:
     - cd vacation_manager
-    - docker build --tag aeao93/vacation_manager .
+    - docker build --tag vacation_manager .
+  cache:
+    paths:
+      - 
 
-Test:
-  stage: test
-  script:
-    - echo "HELLO WORLD"
+# Test:
+#   stage: test
+#   script:
+#     - echo "HELLO WORLD"
 
 DeployMaster:
+  services: vacation_manager
   only:
     - master
   stage: deploy
