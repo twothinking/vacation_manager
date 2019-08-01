@@ -21,6 +21,7 @@ Build:
     - test -f "${DOCKER_CACHE_DIR}/cache.tar" && docker load -i "${DOCKER_CACHE_DIR}/cache.tar" || true
     - cd vacation_manager
     - docker build -t vacation_manager .
+    - docker history -q vacation_manager | grep -v '<missing>'
     - docker save -o "${DOCKER_CACHE_DIR}/cache.tar" $(docker history -q vacation_manager | grep -v '<missing>')
   before_script:
     - mkdir -p $DOCKER_CACHE_DIR
