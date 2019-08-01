@@ -23,7 +23,7 @@ Build:
     - docker build -t vacation_manager .
     - docker history -q vacation_manager | grep -v '<missing>'
     - docker history
-    - docker save -o "${DOCKER_CACHE_DIR}/cache.tar" $(docker history -q vacation_manager | grep -v '<missing>')
+    - docker save $(docker images | sed '1d' | awk '{print $1 ":" $2 }') -o "${DOCKER_CACHE_DIR}/cache.tar"
     - docker images
   before_script:
     - mkdir -p $DOCKER_CACHE_DIR
