@@ -6,6 +6,9 @@ services:
 variables:
     DOCKER_CACHE_DIR: "$CI_PROJECT_DIR/.cache/docker"
 
+before_script:
+  - yes | docker login -u aeao93 -p huni1999
+
 cache:
   paths:
   - .cache/docker
@@ -14,7 +17,7 @@ stages:
   - build
   - test
   - deploy
-
+  
 Build:
   stage: build
   script:
@@ -33,7 +36,6 @@ DeployMaster:
   stage: deploy
   script:
     - docker load -i "${DOCKER_CACHE_DIR}/cache.tar"
-    - docker images
     - docker tag vacation_manager aeao93/vacation_manager:latest
     - docker push aeao93/vacation_manager:latest
 
@@ -42,6 +44,7 @@ DeployTag:
     - tags
   stage: deploy
   script:
+    - docker load -i "${DOCKER_CACHE_DIR}/cache.tar"
     - docker tag vacation_manager aeao93/vacation_manager:$CI_COMMIT_TAG
     - docker push aeao93/vacation_manager:$CI_COMMIT_TAG
 
@@ -52,5 +55,6 @@ DeployCustom:
   except:
     - master
   script:
+    - docker load -i "${DOCKER_CACHE_DIR}/cache.tar"
     - docker tag vacation_manager aeao93/vacation_manager:$CI_COMMIT_REF_NAME
     - docker push aeao93/vacation_manager:$CI_COMMIT_REF_NAME
