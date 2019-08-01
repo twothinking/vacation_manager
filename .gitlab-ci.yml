@@ -5,6 +5,7 @@ services:
 
 variables:
     DOCKER_CACHE_DIR: "$CI_PROJECT_DIR/.cache/docker"
+    VERSION: $(echo "$TRAVIS_TAG" | grep -P '\d\.\d\.\d' || date +%Y.%m.%d | sed 's/\.0/./g')
 
 before_script:
   - yes | docker login -u aeao93 -p huni1999
@@ -25,7 +26,7 @@ Build:
     - cd vacation_manager
     - docker build -t vacation_manager .
     - docker save -o "${DOCKER_CACHE_DIR}/cache.tar" $(docker images vacation_manager | sed '1d' | awk '{print $1 ":" $2 }')
-    - docker images
+    - echo $VERSION
   before_script:
     - mkdir -p $DOCKER_CACHE_DIR
  
