@@ -11,7 +11,7 @@ cache:
   - .cache/docker
 
 before_script:
-  - mkdir $DOCKER_CACHE_DIR
+  - mkdir -p $DOCKER_CACHE_DIR
 
 stages:
   - build
@@ -25,6 +25,7 @@ Build:
     - cd vacation_manager
     - docker build --tag vacation_manager .
     - docker save -o "${DOCKER_CACHE_DIR}/cache.tar" $(docker history -q vacation_manager | grep -v '<missing>')
+ 
 
 DeployMaster:
   only:
