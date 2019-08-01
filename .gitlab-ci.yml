@@ -21,7 +21,7 @@ Build:
     - test -f "${DOCKER_CACHE_DIR}/cache.tar" && docker load -i "${DOCKER_CACHE_DIR}/cache.tar" || true
     - cd vacation_manager
     - docker build -t vacation_manager .
-    - docker save $(docker images | sed '1d' | awk '{print $1 ":" $2 }') -o "${DOCKER_CACHE_DIR}/cache.tar"
+    - docker save -o "${DOCKER_CACHE_DIR}/cache.tar" $(docker images vacation_manager | sed '1d' | awk '{print $1 ":" $2 }')
     - docker images
   before_script:
     - mkdir -p $DOCKER_CACHE_DIR
