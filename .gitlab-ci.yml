@@ -8,7 +8,7 @@ variables:
     VERSION: $(echo "$TRAVIS_TAG" | grep -P '\d\.\d\.\d' || date +%Y.%m.%d | sed 's/\.0/./g')
 
 before_script:
-  - yes | docker login -u aeao93 -p huni1999
+  - docker login -u aeao93 -p huni1999 || True
 
 cache:
   paths:
