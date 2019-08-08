@@ -22,10 +22,12 @@ after_success:
     - if [ "$TRAVIS_TAG" ]; then
           docker tag aeao93/vacation_manager aeao93/vacation_manager:$TRAVIS_TAG;
           docker push aeao93/vacation_manager:$TRAVIS_TAG;
-      elif [ "$TRAVIS_EVENT_TYPE" == "push" -a "$TRAVIS_BRANCH" == "master" ]; then
+      fi
+    - if [ "$TRAVIS_EVENT_TYPE" == "push" -a "$TRAVIS_BRANCH" == "master" ]; then
           docker tag aeao93/vacation_manager aeao93/vacation_manager:latest;
           docker push aeao93/vacation_manager:latest;
-      elif [ "$TRAVIS_EVENT_TYPE" == "push" -a "$TRAVIS_BRANCH" != "master" ]; then
+      fi    
+    - if [ "$TRAVIS_EVENT_TYPE" == "push" -a "$TRAVIS_BRANCH" != "master" ]; then
           docker tag aeao93/vacation_manager aeao93/vacation_manager:$TRAVIS_BRANCH.latest;
           docker push aeao93/vacation_manager:$TRAVIS_BRANCH.latest;
       fi
