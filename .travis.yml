@@ -18,6 +18,7 @@ after_success:
   - docker tag aeao93/vacation_manager:latest aeao93/vacation_manager:beta
 
 after_success:
+    - echo bela
     - if [ "$TRAVIS_TAG" ]; then
           docker tag aeao93/vacation_manager aeao93/vacation_manager:$TRAVIS_TAG;
           docker push aeao93/vacation_manager:$TRAVIS_TAG;
