@@ -12,8 +12,17 @@ before_script:
 
 script:
   - docker build --tag aeao93/vacation_manager .
-  - ./tests/docker-tests.sh --image vacation_manager:testing
 
 after_success:
-  - docker push aeao93/vacation_manager:latest
-  - docker push aeao93/vacation_manager:1.0
+    - if [ "$TRAVIS_TAG" ]; then
+          docker tag vacation_manager aeao93/vacation_manager:$TRAVIS_TAG;
+          docker push flywheel/reaper:$TRAVIS_TAG;
+      fi
+    - if [ "$TRAVIS_EVENT_TYPE" == "push" -a "$TRAVIS_BRANCH" == "master" ]; then
+          docker tag vacation_manager aeao93/vacation_manager:latest;
+          docker push aeao93/vacation_manager:latest;
+      fi
+    - if [ "$TRAVIS_EVENT_TYPE" == "push" -a "$TRAVIS_BRANCH" != "master" ]; then
+          docker tag vacation_manager aeao93/vacation_manager:$TRAVIS_BRANCH.latest;
+          docker push aeao93/vacation_manager:$TRAVIS_BRANCH.latest;
+      fi
