@@ -1,19 +1,13 @@
-ARG BASEIMAGE=python:3.7.3-alpine3.9
+FROM python:3.6-slim
 
-FROM $BASEIMAGE as base
-RUN apk add --no-cache \
-    bash curl rsyslog rsyslog-tls tini \
-    gcc libffi-dev linux-headers musl-dev openssl-dev tzdata
-RUN pip install --upgrade pip==19.1.1 setuptools==41.0.1 wheel==0.33.1
+RUN apt-get update -y && \
+    apt-get install -y python-pip python-dev && \
+    apt-get install -y libssl-dev && \
+    pip install --upgrade pip
 
-WORKDIR /app
-COPY requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
-
-FROM base as dist
-COPY --from=builder /install /usr/local
 COPY . /app
 WORKDIR /app
+RUN pip install -r requirements.txt
 RUN pip install -e .
 EXPOSE 80
 CMD ["python", "vacation_manager.py"]
