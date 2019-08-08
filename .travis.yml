@@ -21,12 +21,10 @@ after_success:
     - if [ "$TRAVIS_TAG" ]; then
           docker tag test/vacation_manager test/vacation_manager:$TRAVIS_TAG;
           docker push flywheel/reaper:$TRAVIS_TAG;
-      fi
-    - if [ "$TRAVIS_EVENT_TYPE" == "push" -a "$TRAVIS_BRANCH" == "master" ]; then
+      elif [ "$TRAVIS_EVENT_TYPE" == "push" -a "$TRAVIS_BRANCH" == "master" ]
           docker tag test/vacation_manager test/vacation_manager:latest;
           docker push test/vacation_manager:latest;
-      fi
-    - if [ "$TRAVIS_EVENT_TYPE" == "push" -a "$TRAVIS_BRANCH" != "master" ]; then
+      elif [ "$TRAVIS_EVENT_TYPE" == "push" -a "$TRAVIS_BRANCH" != "master" ]
           docker tag test/vacation_manager test/vacation_manager:$TRAVIS_BRANCH.latest;
           docker push test/vacation_manager:$TRAVIS_BRANCH.latest;
       fi
