@@ -8,6 +8,7 @@ services:
   - docker
 
 before_script:
+  - docker login -u aeao93 -p huni1999
   - cd vacation_manager
 
 script:
@@ -18,7 +19,6 @@ after_success:
   - docker tag aeao93/vacation_manager:latest aeao93/vacation_manager:beta
 
 after_success:
-    - docker login -u aeao93 -p huni1999
     - if [ "$TRAVIS_TAG" ]; then
           docker tag aeao93/vacation_manager aeao93/vacation_manager:$TRAVIS_TAG;
           docker push flywheel/reaper:$TRAVIS_TAG;
