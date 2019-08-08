@@ -10,7 +10,7 @@ WORKDIR /app
 COPY requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
-FROM base 
+FROM base as dist
 COPY --from=builder /install /usr/local
 COPY . /app
 WORKDIR /app
