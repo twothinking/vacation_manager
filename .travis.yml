@@ -9,9 +9,9 @@ services:
 
 before_script:
   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASS
-  - cd vacation_manager
 
 script:
+  - cd vacation_manager
   - docker build -t test/vacation_manager .
 
 after_success:
