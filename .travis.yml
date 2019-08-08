@@ -12,19 +12,19 @@ before_script:
 
 script:
   - cd vacation_manager
-  - docker build -t test/vacation_manager .
+  - docker build -t aeao93/vacation_manager .
 
 after_success:
-  - docker tag test/vacation_manager:latest test/vacation_manager:beta
+  - docker tag aeao93/vacation_manager:latest aeao93/vacation_manager:beta
 
 after_success:
     - if [ "$TRAVIS_TAG" ]; then
-          docker tag test/vacation_manager test/vacation_manager:$TRAVIS_TAG;
-          docker push test/vacation_manager:$TRAVIS_TAG;
+          docker tag aeao93/vacation_manager aeao93/vacation_manager:$TRAVIS_TAG;
+          docker push aeao93/vacation_manager:$TRAVIS_TAG;
       elif [ "$TRAVIS_EVENT_TYPE" == "push" -a "$TRAVIS_BRANCH" == "master" ]
-          docker tag test/vacation_manager test/vacation_manager:latest;
-          docker push test/vacation_manager:latest;
+          docker tag aeao93/vacation_manager aeao93/vacation_manager:latest;
+          docker push aeao93/vacation_manager:latest;
       elif [ "$TRAVIS_EVENT_TYPE" == "push" -a "$TRAVIS_BRANCH" != "master" ]
-          docker tag test/vacation_manager test/vacation_manager:$TRAVIS_BRANCH.latest;
-          docker push test/vacation_manager:$TRAVIS_BRANCH.latest;
+          docker tag aeao93/vacation_manager aeao93/vacation_manager:$TRAVIS_BRANCH.latest;
+          docker push aeao93/vacation_manager:$TRAVIS_BRANCH.latest;
       fi
