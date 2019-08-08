@@ -11,7 +11,7 @@ before_script:
   - docker pull aeao93/vacation_manager || true
 
 script:
-  - docker build --tag aeao93/vacation_manager .
+  - docker build -t vacation_manager .
 
 after_success:
     - if [ "$TRAVIS_TAG" ]; then
