@@ -12,8 +12,7 @@ before_script:
   - cd vacation_manager
 
 script:
-  - docker build --tag test/vacation_manager .
-  - ./tests/docker-tests.sh
+  - docker build -t test/vacation_manager .
 
 after_success:
   - docker tag test/vacation_manager:latest test/vacation_manager:beta
